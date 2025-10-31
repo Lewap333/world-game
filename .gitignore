@@ -1,0 +1,34 @@
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# === Build directories ===
+out/
+build/
+target/
+
+# === System files ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+
+# === Temporary files ===
+*.class
+*.tmp
+*.swp
+*.bak
+*.iml
+
+# === Maven / Gradle ===
+.mvn/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ignore all contents of the saves folder except .gitkeep
+saves/*
+!saves/.gitkeep
+
