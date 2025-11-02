@@ -10,7 +10,7 @@ public abstract class Plant extends Organism {
 
     private static final int PROCENT_ROZROST = 25;
     @Override
-    public void akcja() {
+    public void action() {
         int szansa = (int) (Math.random() * 100);
 
         if (szansa < PROCENT_ROZROST) {  // PROCENT_ROZROST na rozrośnięcie jeśli jest wolne pole
@@ -42,8 +42,8 @@ public abstract class Plant extends Organism {
             }
 
             // upewnij się, że nowe pozycje są w granicach planszy
-            if (newX >= 0 && newX < getSwiat().getWidth() && newY >= 0 && newY < getSwiat().getHeight()) {
-                if (getSwiat().getOrganism(newX, newY) == null) {
+            if (newX >= 0 && newX < getWorld().getWidth() && newY >= 0 && newY < getWorld().getHeight()) {
+                if (getWorld().getOrganism(newX, newY) == null) {
                     stworzNowe(newX, newY);
                 }
             }
@@ -53,9 +53,9 @@ public abstract class Plant extends Organism {
 
 
     @Override
-    public void kolizja(Organism other) {
+    public void collision(Organism other) {
         String event = other.getClass().getSimpleName() + "(" + getX() + "," + getY() + ") zjada " + getClass().getSimpleName();
-        getSwiat().addLog(event);
+        getWorld().addLog(event);
         return;
     }
 
@@ -67,19 +67,19 @@ public abstract class Plant extends Organism {
 
         // Rozrastanie roslin
         if (this instanceof Grass) {
-            nowyOrganism = new Grass(getSwiat(), x, y);
+            nowyOrganism = new Grass(getWorld(), x, y);
         } else if (this instanceof Milkweed) {
-            nowyOrganism = new Milkweed(getSwiat(), x, y);
+            nowyOrganism = new Milkweed(getWorld(), x, y);
         } else if (this instanceof Guarani) {
-            nowyOrganism = new Guarani(getSwiat(), x, y);
+            nowyOrganism = new Guarani(getWorld(), x, y);
         } else if (this instanceof Berries) {
-            nowyOrganism = new Berries(getSwiat(), x, y);
+            nowyOrganism = new Berries(getWorld(), x, y);
         } else if (this instanceof Borsch) {
-            nowyOrganism = new Borsch(getSwiat(), x, y);
+            nowyOrganism = new Borsch(getWorld(), x, y);
         }
 
-        getSwiat().setOrganism(x, y, nowyOrganism);
+        getWorld().setOrganism(x, y, nowyOrganism);
         String event = getClass().getSimpleName() + " rozmnozyl sie na pole (" + x + ", " + y + ")";
-        getSwiat().addLog(event);
+        getWorld().addLog(event);
     }
 }

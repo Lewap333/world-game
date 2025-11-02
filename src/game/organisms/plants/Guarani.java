@@ -9,14 +9,14 @@ import java.awt.Color;
 public class Guarani extends Plant {
     public Guarani(World world, int x, int y) {
         super(world, x, y);
-        setSila(0);
+        setStr(0);
         setColor(Color.CYAN);
     }
 
     @Override
-    public void kolizja(Organism other) {
+    public void collision(Organism other) {
         String event = getClass().getSimpleName() + "(" + getX() + "," + getY() + ") zjada " + getClass().getSimpleName();
-        getSwiat().addLog(event);
-        other.setSila(other.getSila() * 3);
+        getWorld().addLog(event);
+        other.setStr(other.getStr() * 3);
     }
 }

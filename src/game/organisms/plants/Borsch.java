@@ -10,20 +10,20 @@ import java.awt.Color;
 public class Borsch extends Plant {
     public Borsch(World world, int x, int y) {
         super(world, x, y);
-        setSila(10);
+        setStr(10);
         setColor(Color.RED);
     }
 
     @Override
-    public void kolizja(Organism other) {
+    public void collision(Organism other) {
         String event = other.getClass().getSimpleName() + "(" + getX() + "," + getY() + ") zjada " + getClass().getSimpleName();
-        getSwiat().addLog(event);
-        other.setCzyZyje(false);
+        getWorld().addLog(event);
+        other.setAlive(false);
     }
 
     @Override
-    public void akcja() {
-        super.akcja();
+    public void action() {
+        super.action();
 
         int x = getX();
         int y = getY();
@@ -37,22 +37,21 @@ public class Borsch extends Plant {
                 }
 
                 // Sprawdza czy pole nie jest poza plansza
-                if (x + i < 0 || x + i >= getSwiat().getWidth() || y + j < 0 || y + j >= getSwiat().getHeight()) {
+                if (x + i < 0 || x + i >= getWorld().getWidth() || y + j < 0 || y + j >= getWorld().getHeight()) {
                     continue;
                 }
 
                 // Organizm z pola obok barszczu
-                Organism neighbor = getSwiat().getOrganism(x + i, y + j);
+                Organism neighbor = getWorld().getOrganism(x + i, y + j);
 
                 // Jeśli organizm jest zwierzę, usuń go
                 if (neighbor instanceof Animal) {
                     String event = getClass().getSimpleName() + "(" + getX() + "," + getY() + ") zabija " + neighbor.getClass().getSimpleName();
-                    getSwiat().addLog(event);
-                    neighbor.setCzyZyje(false);
-                    getSwiat().setOrganism(neighbor.getX(), neighbor.getY(), null);
+                    getWorld().addLog(event);
+                    neighbor.setAlive(false);
+                    getWorld().setOrganism(neighbor.getX(), neighbor.getY(), null);
                 }
             }
         }
-        world.updateBoard();
     }
 }

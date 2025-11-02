@@ -8,13 +8,13 @@ import java.awt.Color;
 public class Milkweed extends Plant {
     public Milkweed(World world, int x, int y) {
         super(world, x, y);
-        setSila(0);
+        setStr(0);
         setColor(Color.YELLOW);
     }
 
-    public void akcja() {
+    public void action() {
         for (int i = 0; i < 3; i++) {
-            super.akcja();
+            super.action();
         }
     }
 }

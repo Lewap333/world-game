@@ -10,29 +10,29 @@ public class Turtle extends Animal {
 
     public Turtle(World world, int x, int y) {
         super(world, x, y);
-        setSila(2);
-        setInicjatywa(1);
+        setStr(2);
+        setInitiative(1);
         Color darkGreen = new Color(0, 100, 0);
         setColor(darkGreen);
     }
 
     @Override
-    public void akcja() {
+    public void action() {
         int moveChance = (int) (Math.random() * 4); // szansa na wykonanie ruchu: 0 - 25%
 
         if (moveChance == 1) {
-            super.akcja();
+            super.action();
         } else {
             String event = getClass().getSimpleName() + "(" + getX() + "," + getY() + ")" + " nie ruszyl sie";
-            getSwiat().addLog(event);
+            getWorld().addLog(event);
         }
     }
 
     @Override
-    public boolean czyOdbilAtak(Organism other) {
-        if (other.getSila() < 5) {  // odbicie ataku zwierząt o sile < 5
+    public boolean didParryAttack(Organism other) {
+        if (other.getStr() < 5) {  // odbicie ataku zwierząt o sile < 5
             String event = getClass().getSimpleName() + "(" + getX() + "," + getY() + ")" + " odbil atak " + other.getClass().getSimpleName();
-            getSwiat().addLog(event);
+            getWorld().addLog(event);
             return true;
         } else {
             return false;

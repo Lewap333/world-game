@@ -9,13 +9,13 @@ import java.awt.Color;
 public class Fox extends Animal {
     public Fox(World world, int x, int y) {
         super(world, x, y);
-        setSila(3);
-        setInicjatywa(9);
+        setStr(3);
+        setInitiative(9);
         setColor(Color.ORANGE);
     }
 
     @Override
-    public void kolizja(Organism other) {
+    public void collision(Organism other) {
         if (other == null) {
             return;
         }
@@ -25,24 +25,24 @@ public class Fox extends Animal {
             return;
         }
 
-        if (other.czyOdbilAtak(this)) {
+        if (other.didParryAttack(this)) {
             return;
         }
 
-        int myStrength = getSila();
-        int otherStrength = other.getSila();
+        int myStrength = getStr();
+        int otherStrength = other.getStr();
 
         if (myStrength >= otherStrength) {
-            other.zjedz();
-            getSwiat().setOrganism(getX(), getY(), null);
-            getSwiat().setOrganism(other.getX(), other.getY(), this);
+            other.eat();
+            getWorld().setOrganism(getX(), getY(), null);
+            getWorld().setOrganism(other.getX(), other.getY(), this);
             setX(other.getX());
             setY(other.getY());
             String event = getClass().getSimpleName() + " pokonal " + other.getClass().getSimpleName() + " i zajal pole (" + other.getX() + "," + other.getY() + ")";
-            getSwiat().addLog(event);
+            getWorld().addLog(event);
         } else {
             String event = getClass().getSimpleName() + "(" + getX() + ", " + getY() + ")" + " wykorzystal dobry wech";
-            getSwiat().addLog(event);
+            getWorld().addLog(event);
             return;
         }
     }

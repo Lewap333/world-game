@@ -9,14 +9,14 @@ import java.awt.Color;
 public class Antelope extends Animal {
     public Antelope(World world, int x, int y) {
         super(world, x, y);
-        setSila(4);
-        setInicjatywa(4);
+        setStr(4);
+        setInitiative(4);
         Color brown = new Color(139, 69, 19);
         setColor(brown);
     }
 
     @Override
-    public void akcja() {
+    public void action() {
         int direction = (int) (Math.random() * 4); // wylosuj kierunek: 0 - góra, 1 - dół, 2 - lewo, 3 - prawo
         int newX = getX();
         int newY = getY();
@@ -37,53 +37,53 @@ public class Antelope extends Animal {
         }
 
         // upewnij się, że nowe pozycje są w granicach planszy
-        if (newX >= 0 && newX < getSwiat().getWidth() && newY >= 0 && newY < getSwiat().getHeight()) {
+        if (newX >= 0 && newX < getWorld().getWidth() && newY >= 0 && newY < getWorld().getHeight()) {
             // jeśli pole jest wolne, przemieść organizm na nową pozycję
-            if (getSwiat().getOrganism(newX, newY) == null) {
-                getSwiat().setOrganism(getX(), getY(), null);
-                getSwiat().setOrganism(newX, newY, this);
+            if (getWorld().getOrganism(newX, newY) == null) {
+                getWorld().setOrganism(getX(), getY(), null);
+                getWorld().setOrganism(newX, newY, this);
                 setX(newX);
                 setY(newY);
             }
             // w przeciwnym razie wykonaj kolizję
             else {
-                kolizja(getSwiat().getOrganism(newX, newY));
+                collision(getWorld().getOrganism(newX, newY));
             }
         }
     }
 
 
     @Override
-    public void kolizja(Organism other) {
+    public void collision(Organism other) {
         if (getClass() == other.getClass()) {
-            super.kolizja(other);
+            super.collision(other);
         } else {
             int ucieczka = (int) (Math.random() * 2);
             // normalna kolizja
             if (ucieczka == 1) {
-                super.kolizja(other);
+                super.collision(other);
             }
             // Ucieczka
             else {
                 int newX = getX();
                 int newY = getY();
 
-                if (getSwiat().getOrganism(other.getX() - 1, other.getY()) == null) {
+                if (getWorld().getOrganism(other.getX() - 1, other.getY()) == null) {
                     newX = other.getX() - 1;
-                } else if (getSwiat().getOrganism(other.getX() + 1, other.getY()) == null) {
+                } else if (getWorld().getOrganism(other.getX() + 1, other.getY()) == null) {
                     newX = other.getX() + 1;
-                } else if (getSwiat().getOrganism(other.getX(), other.getY() - 1) == null) {
+                } else if (getWorld().getOrganism(other.getX(), other.getY() - 1) == null) {
                     newY = other.getY() - 1;
-                } else if (getSwiat().getOrganism(other.getX(), other.getY() + 1) == null) {
+                } else if (getWorld().getOrganism(other.getX(), other.getY() + 1) == null) {
                     newY = other.getY() + 1;
                 }
 
-                getSwiat().setOrganism(getX(), getY(), null);
-                getSwiat().setOrganism(newX, newY, this);
+                getWorld().setOrganism(getX(), getY(), null);
+                getWorld().setOrganism(newX, newY, this);
                 setX(newX);
                 setY(newY);
                 String event = getClass().getSimpleName() + " ucieka przed walką na pole (" + getX() + "," + getY() + ")";
-                getSwiat().addLog(event);
+                getWorld().addLog(event);
             }
         }
     }

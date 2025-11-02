@@ -6,11 +6,11 @@ import java.awt.Color;
 
 public abstract class Organism {
     protected Color color;
-    protected int sila;
-    protected int inicjatywa;
-    protected int wiek;
+    protected int str;
+    protected int initiative;
+    protected int age;
     protected int x, y;
-    protected boolean czyZyje;
+    protected boolean isAlive;
     protected World world;
     protected int cooldown;
     protected int abilityDuration;
@@ -23,66 +23,66 @@ public abstract class Organism {
         return color;
     }
 
-    public World getSwiat() {
+    public World getWorld() {
         return world;
     }
 
-    public void zjedz() {
+    public void eat() {
         // Ten organizm ma byc usuniety
-        getSwiat().setOrganism(getX(), getY(), null);
-        setCzyZyje(false);
+        getWorld().setOrganism(getX(), getY(), null);
+        setAlive(false);
     }
 
-    public boolean czyOdbilAtak(Organism other) {
+    public boolean didParryAttack(Organism other) {
         return false;
     }
 
-    public abstract void akcja();
+    public abstract void action();
 
-    public abstract void kolizja(Organism other);
+    public abstract void collision(Organism other);
 
     public Organism(World world, int x, int y) {
         this.x = x;
         this.y = y;
-        this.wiek = 0;
-        this.inicjatywa = 0;
-        this.sila = 0;
+        this.age = 0;
+        this.initiative = 0;
+        this.str = 0;
         this.abilityDuration = 0;
         this.cooldown = 0;
-        this.czyZyje = true;
+        this.isAlive = true;
         this.world = world;
     }
 
-    public int getSila() {
-        return sila;
+    public int getStr() {
+        return str;
     }
 
-    public int getInicjatywa() {
-        return inicjatywa;
+    public int getInitiative() {
+        return initiative;
     }
 
-    public void setSila(int sila) {
-        this.sila = sila;
+    public void setStr(int str) {
+        this.str = str;
     }
 
-    public void setInicjatywa(int inicjatywa) {
-        this.inicjatywa = inicjatywa;
+    public void setInitiative(int initiative) {
+        this.initiative = initiative;
     }
 
-    public int getWiek() {
-        return wiek;
+    public int getAge() {
+        return age;
     }
 
-    public void setWiek(int wiek) {
-        this.wiek = wiek;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public boolean getCzyZyje() {
-        return czyZyje;
+    public boolean getAlive() {
+        return isAlive;
     }
 
-    public void setCzyZyje(boolean czyZyje) {
-        this.czyZyje = czyZyje;
+    public void setAlive(boolean alive) {
+        this.isAlive = alive;
     }
 
     public int getX() {

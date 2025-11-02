@@ -8,7 +8,7 @@ import java.awt.Color;
 public class Grass extends Plant {
     public Grass(World world, int x, int y) {
         super(world, x, y);
-        setSila(0);
+        setStr(0);
         setColor(Color.GREEN);
     }
 }

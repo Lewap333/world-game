@@ -12,8 +12,8 @@ public class Human extends Animal {
 
     public Human(World world, int x, int y) {
         super(world, x, y);
-        setSila(5);
-        setInicjatywa(5);
+        setStr(5);
+        setInitiative(5);
         setColor(Color.MAGENTA);
     }
 
@@ -23,11 +23,10 @@ public class Human extends Animal {
     }
 
     @Override
-    public void akcja() {
+    public void action() {
 
         if (abilityDuration > 0) {
             specialnaUmiejetnosc();
-            world.updateBoard();
             abilityDuration--;
         }
         int newX = getX();
@@ -64,7 +63,7 @@ public class Human extends Animal {
             }
             // nie jest puste kolizja
             else {
-                kolizja(world.getOrganism(newX, newY));
+                collision(world.getOrganism(newX, newY));
             }
         }
     }
@@ -96,8 +95,8 @@ public class Human extends Animal {
 
                 // Usuwa wszystkie organizmy wokół, które nie są null
                 if (neighbor != null) {
-                    neighbor.setCzyZyje(false);
-                    getSwiat().setOrganism(neighbor.getX(), neighbor.getY(), null);
+                    neighbor.setAlive(false);
+                    getWorld().setOrganism(neighbor.getX(), neighbor.getY(), null);
                 }
             }
         }
