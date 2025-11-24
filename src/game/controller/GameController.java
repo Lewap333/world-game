@@ -1,10 +1,7 @@
 package game.controller;
-
 import game.UI.GameView;
 import game.World;
-
 import game.World.Direction;
-
 import java.io.IOException;
 
 public final class GameController implements AppController {
