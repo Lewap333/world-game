@@ -12,7 +12,7 @@ public class SimpleSpawner implements Spawner {
 
     private final PopulationPlan plan;
 
-     public SimpleSpawner(PopulationPlan plan) {
+    public SimpleSpawner(PopulationPlan plan) {
         this.plan = plan;
      }
 
@@ -54,8 +54,8 @@ public class SimpleSpawner implements Spawner {
         }
     }
 
-    // ===== helpers =====
 
+    // ===== helpers =====
     private <T extends Organism> T spawnRandomFree(World world, Class<T> cls) {
         int[] cell = findFreeCell(world);
         return trySpawnAt(world, cls, cell[0], cell[1])

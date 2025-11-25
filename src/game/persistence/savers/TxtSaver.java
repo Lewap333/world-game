@@ -1,6 +1,6 @@
 package game.persistence.savers;
 
-import game.World;
+import game.ReadOnlyWorld;
 import game.organisms.Organism;
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 public class TxtSaver implements WorldSaver
 {
     @Override
-    public void save(World world, String filePath) throws IOException
+    public void save(ReadOnlyWorld world, String filePath) throws IOException
     {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             // Zapisanie wymiarow swiata

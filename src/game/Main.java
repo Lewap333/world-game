@@ -30,6 +30,7 @@ public class Main {
                 .build();
 
         Spawner spawner = new SimpleSpawner(plan);
+
         WorldSaver saver = new TxtSaver();
         WorldLoader loader = new TxtLoader();
         World world = new World(20, 20, plan, spawner, saver, loader);

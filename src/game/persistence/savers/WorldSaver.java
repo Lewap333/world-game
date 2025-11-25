@@ -1,10 +1,10 @@
 package game.persistence.savers;
 
-import game.World;
+import game.ReadOnlyWorld;
 
 import java.io.IOException;
 
 public interface WorldSaver
 {
-    void save(World world, String filePath) throws IOException;
+    void save(ReadOnlyWorld world, String filePath) throws IOException;
 }

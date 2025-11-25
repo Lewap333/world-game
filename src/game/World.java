@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-public class World implements ReadOnlyWorld{
+public class World implements ControllableWorld {
     public enum Direction { UP, DOWN, LEFT, RIGHT }
     private final GameLog log;
     private final Spawner spawner;
